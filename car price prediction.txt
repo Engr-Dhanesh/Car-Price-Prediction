@@ -1,0 +1,40 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the data from the CSV file
+data = pd.read_csv('C:/Users/LENOVO/Desktop/car data.csv')
+
+# Display the first 5 rows of the data
+print(data.head())
+
+# Display the summary statistics of the data
+print(data.describe())
+
+# Perform your predictions here
+# Let's assume you have a trained model called `model` and have made predictions called `predictions`
+
+# Generate some sample predictions for demonstration (remove this in your actual code)
+predictions = np.random.uniform(data['Selling_Price'].min(), data['Selling_Price'].max(), len(data))
+
+# Display the graph of predictions
+plt.figure(figsize=(10, 6))  # Adjust figure size for better visualization
+plt.plot(data['Year'], data['Selling_Price'], linestyle='-', color='blue', marker='o', markersize=8, label='Actual Prices')
+plt.plot(data['Year'], predictions, linestyle='-', color='red', marker='x', markersize=8, label='Predicted Prices')
+plt.xlabel('Year')
+plt.ylabel('Selling Price')
+plt.title('Car Price Prediction')
+plt.legend(loc='best')
+plt.grid(True)  # Add gridlines for better readability
+plt.ylim(bottom=0)  # Set y-axis limit to start from 0
+plt.tight_layout()  # Adjust layout for better spacing
+
+# Custom heartbeat display format
+plt.axhline(y=data['Selling_Price'].min(), color='green', linestyle='--', linewidth=2, alpha=0.5)
+plt.axhline(y=data['Selling_Price'].max(), color='green', linestyle='--', linewidth=2, alpha=0.5)
+
+for i in range(len(data)):
+    if i % 2 == 0:
+        plt.axvline(x=data['Year'][i], color='green', linestyle='--', linewidth=2, alpha=0.5)
+
+plt.show()
